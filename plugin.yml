@@ -1,0 +1,21 @@
+name: PlatinumMounts
+main: com.gmail.Annarkwin.Platinum.Mounts.Mounts
+version: 1.0
+api-version: 1.16
+depend: [PlatinumAPI]
+
+commands:
+  Mount:
+    usage: /Mount help
+    description: "Store and summon a personal horse"
+    permission: platinum.mount
+    
+permissions:
+  Platinum.mount.user:
+    default: true
+    children:
+      Platinum.mount: true
+      Platinum.mount.help: true
+      Platinum.mount.ride: true
+      Platinum.mount.claim: true
+      Platinum.mount.release: true
