@@ -17,8 +17,9 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
 @SerializableAs("Mount")
-public class Mount implements ConfigurationSerializable {
-	
+public class Mount implements ConfigurationSerializable
+{
+
 	private String color = Horse.Color.BLACK.toString();
 	private String style = Horse.Style.WHITE.toString();
 	private String armor = Material.AIR.toString();
@@ -27,10 +28,15 @@ public class Mount implements ConfigurationSerializable {
 	private double jumpstrength = .2;
 	private double maxhealth = 20;
 	private double currenthealth = 20;
-	
-	public Mount () {}
 
-	public Mount(Horse h) {
+	public Mount()
+	{
+
+	}
+
+	public Mount( Horse h )
+	{
+
 		color = h.getColor().toString();
 		style = h.getStyle().toString();
 		if (h.getInventory().getArmor() != null)
@@ -42,91 +48,163 @@ public class Mount implements ConfigurationSerializable {
 		speed = h.getAttribute(Attribute.GENERIC_MOVEMENT_SPEED).getValue();
 		currenthealth = h.getHealth();
 		maxhealth = h.getAttribute(Attribute.GENERIC_MAX_HEALTH).getValue();
+
 	}
-	
-	public Mount(Map<String, Object> o){
-		//Get fields of object and retrieve them from map
-		for(Field f : getClass().getDeclaredFields()){
-			try {
-				if(o.get(f.getName()) != null)
+
+	public Mount( Map<String, Object> o )
+	{
+
+		// Get fields of object and retrieve them from map
+		for (Field f : getClass().getDeclaredFields())
+		{
+
+			try
+			{
+
+				if (o.get(f.getName()) != null)
 					f.set(this, o.get(f.getName()));
-			} catch (Exception e) {
-				//Default
+
 			}
+			catch (Exception e)
+			{
+
+				// Default
+			}
+
 		}
+
 	}
 
 	@Override
-	public Map<String, Object> serialize() {
-		//Get fields of object and map them with value
+	public Map<String, Object> serialize()
+	{
+
+		// Get fields of object and map them with value
 		HashMap<String, Object> s = new HashMap<String, Object>();
-		for(Field f : getClass().getDeclaredFields()){
-			try {
+
+		for (Field f : getClass().getDeclaredFields())
+		{
+
+			try
+			{
+
 				s.put(f.getName(), f.get(this));
-			} catch (Exception e) {
-				e.printStackTrace();
+
 			}
+			catch (Exception e)
+			{
+
+				e.printStackTrace();
+
+			}
+
 		}
+
 		return s;
+
 	}
-	
-	public Color getColor() {
+
+	public Color getColor()
+	{
+
 		return Color.valueOf(color);
+
 	}
-	
-	public Style getStyle() {
+
+	public Style getStyle()
+	{
+
 		return Style.valueOf(style);
+
 	}
-	
-	public double getSpeed() {
+
+	public double getSpeed()
+	{
+
 		return speed;
+
 	}
-	
-	public Material getArmor() {
+
+	public Material getArmor()
+	{
+
 		return Material.valueOf(armor);
+
 	}
-	
-	public double getJumpStrength() {
+
+	public double getJumpStrength()
+	{
+
 		return jumpstrength;
+
 	}
-	
-	public double getMaxHealth() {
+
+	public double getMaxHealth()
+	{
+
 		return maxhealth;
+
 	}
-	
-	public double getCurrentHealth() {
+
+	public double getCurrentHealth()
+	{
+
 		return currenthealth;
+
 	}
-	
-	public void setColor(Color clr) {
+
+	public void setColor( Color clr )
+	{
+
 		color = clr.toString();
+
 	}
-	
-	public void setStyle(Style sty) {
+
+	public void setStyle( Style sty )
+	{
+
 		style = sty.toString();
+
 	}
-	
-	public void setSpeed(double spd) {
+
+	public void setSpeed( double spd )
+	{
+
 		speed = spd;
+
 	}
-	
-	public void setJumpStrength(double str) {
+
+	public void setJumpStrength( double str )
+	{
+
 		jumpstrength = str;
+
 	}
-	
-	public void setArmor(Material barding) {
+
+	public void setArmor( Material barding )
+	{
+
 		armor = barding.toString();
+
 	}
-	
-	public void setMaxHealth(double hp) {
+
+	public void setMaxHealth( double hp )
+	{
+
 		maxhealth = hp;
+
 	}
-	
-	public void setCurrentHealth(double hp) {
+
+	public void setCurrentHealth( double hp )
+	{
+
 		currenthealth = hp;
+
 	}
-	
-	public void mount(Player p) {
+
+	public void mount( Player p )
+	{
+
 		Horse h = (Horse) p.getWorld().spawnEntity(p.getLocation(), EntityType.HORSE);
 
 		h.setCustomNameVisible(false);
@@ -138,10 +216,13 @@ public class Mount implements ConfigurationSerializable {
 		h.getInventory().setArmor(new ItemStack(getArmor()));
 		h.setColor(getColor());
 		h.setStyle(getStyle());
-		if (saddled) h.getInventory().setSaddle(new ItemStack(Material.SADDLE));
+		if (saddled)
+			h.getInventory().setSaddle(new ItemStack(Material.SADDLE));
 		h.setJumpStrength(jumpstrength);
 		h.setHealth(currenthealth);
-		
+
 		h.addPassenger(p);
+
 	}
+
 }

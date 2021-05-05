@@ -9,7 +9,8 @@ import com.gmail.Annarkwin.Platinum.API.Subcommand;
 import com.gmail.Annarkwin.Platinum.Mounts.Mount;
 import com.gmail.Annarkwin.Platinum.Mounts.Mounts;
 
-public class MountJump implements Subcommand {
+public class MountJump implements Subcommand
+{
 
 	private String description = "Set mount Jump Strength";
 	private MainCommand main;
@@ -18,53 +19,91 @@ public class MountJump implements Subcommand {
 	private boolean playeronly = true;
 	private String usage = "/mount jump <#>";
 
-	public MountJump(MainCommand maincommand) {
+	public MountJump( MainCommand maincommand )
+	{
+
 		main = maincommand;
+
 	}
 
 	@Override
-	public String getDescription() {
+	public String getDescription()
+	{
+
 		return description;
+
 	}
 
 	@Override
-	public MainCommand getMainCommand() {
+	public MainCommand getMainCommand()
+	{
+
 		return main;
+
 	}
 
 	@Override
-	public String getName() {
+	public String getName()
+	{
+
 		return name;
+
 	}
 
 	@Override
-	public String getPermission() {
+	public String getPermission()
+	{
+
 		return permission;
+
 	}
 
 	@Override
-	public String getUsage() {
+	public String getUsage()
+	{
+
 		return usage;
+
 	}
 
 	@Override
-	public boolean isPlayerOnly() {
+	public boolean isPlayerOnly()
+	{
+
 		return playeronly;
+
 	}
 
 	@Override
-	public void run(CommandSender sender, String[] args) {
+	public void run( CommandSender sender, String[] args )
+	{
+
 		Player p = (Player) sender;
 		Mount m = Mounts.mount_manager.getMount(p);
-		
-		if (m == null) {
+
+		if (m == null)
+		{
+
 			p.sendMessage("§4[Error]:§f You don't have a mount");
-		} else {
-			if (args.length <= 1 || !CommandHelper.isPositiveDouble(args[1])) {p.sendMessage("§4[Error]: §fEnter a positive number"); return;}
+
+		}
+		else
+		{
+
+			if (args.length <= 1 || !CommandHelper.isPositiveDouble(args[1]))
+			{
+
+				p.sendMessage("§4[Error]: §fEnter a positive number");
+				return;
+
+			}
 
 			m.setJumpStrength(CommandHelper.getDouble(args[1]));
-			
+
 			p.sendMessage("§2[Info]: §fMount jump strength set to " + args[1]);
+
 		}
+
 	}
+
 }

@@ -11,7 +11,8 @@ import com.gmail.Annarkwin.Platinum.API.Subcommand;
 import com.gmail.Annarkwin.Platinum.Mounts.Mount;
 import com.gmail.Annarkwin.Platinum.Mounts.Mounts;
 
-public class MountClaim implements Subcommand {
+public class MountClaim implements Subcommand
+{
 
 	private String description = "Claim the mount you're riding";
 	private MainCommand main;
@@ -20,56 +21,91 @@ public class MountClaim implements Subcommand {
 	private boolean playeronly = true;
 	private String usage = "/mount claim";
 
-	public MountClaim(MainCommand maincommand) {
+	public MountClaim( MainCommand maincommand )
+	{
+
 		main = maincommand;
+
 	}
 
 	@Override
-	public String getDescription() {
+	public String getDescription()
+	{
+
 		return description;
+
 	}
 
 	@Override
-	public MainCommand getMainCommand() {
+	public MainCommand getMainCommand()
+	{
+
 		return main;
+
 	}
 
 	@Override
-	public String getName() {
+	public String getName()
+	{
+
 		return name;
+
 	}
 
 	@Override
-	public String getPermission() {
+	public String getPermission()
+	{
+
 		return permission;
+
 	}
 
 	@Override
-	public String getUsage() {
+	public String getUsage()
+	{
+
 		return usage;
+
 	}
 
 	@Override
-	public boolean isPlayerOnly() {
+	public boolean isPlayerOnly()
+	{
+
 		return playeronly;
+
 	}
 
 	@Override
-	public void run(CommandSender sender, String[] args) {
+	public void run( CommandSender sender, String[] args )
+	{
+
 		Player p = (Player) sender;
 		Entity vehicle = p.getVehicle();
 		Mount m = Mounts.mount_manager.getMount(p);
-		
-		if (vehicle != null && vehicle.getType() == EntityType.HORSE) {
+
+		if (vehicle != null && vehicle.getType() == EntityType.HORSE)
+		{
+
 			Horse h = (Horse) vehicle;
 
-			if (m == null) {
+			if (m == null)
+			{
+
 				p.sendMessage("§2[Info]:§f This is now your mount");
 				m = Mounts.mount_manager.setMount(p, new Mount(h));
 				h.remove();
-			} else {
-				p.sendMessage("§2[Info]:§f You already have a mount");
+
 			}
+			else
+			{
+
+				p.sendMessage("§2[Info]:§f You already have a mount");
+
+			}
+
 		}
+
 	}
+
 }

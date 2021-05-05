@@ -8,7 +8,8 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDeathEvent;
 import org.spigotmc.event.entity.EntityDismountEvent;
 
-public class ListenerMounts implements Listener {
+public class ListenerMounts implements Listener
+{
 
 //	//TODO check for if mount/dismount horse is the same as your mount
 //
@@ -33,20 +34,33 @@ public class ListenerMounts implements Listener {
 //	}
 
 	@EventHandler(ignoreCancelled = false)
-	public void dismountlistener(EntityDismountEvent e) {
-		if (e.getDismounted().getType() == EntityType.HORSE) {
-			if (e.getEntity() instanceof Player) {
+	public void dismountlistener( EntityDismountEvent e )
+	{
+
+		if (e.getDismounted().getType() == EntityType.HORSE)
+		{
+
+			if (e.getEntity() instanceof Player)
+			{
+
 				Horse h = (Horse) e.getDismounted();
 				Player p = (Player) e.getEntity();
 				Mount m = Mounts.mount_manager.getMount(p);
 
-				if (h.getHealth() != 0 && m != null && h.getCustomName() != null && h.getCustomName().equals("§2" + p.getDisplayName() + "'s mount")){
+				if (h.getHealth() != 0 && m != null && h.getCustomName() != null
+						&& h.getCustomName().equals("§2" + p.getDisplayName() + "'s mount"))
+				{
+
 					Mounts.mount_manager.setMount(p, new Mount(h));
 					p.sendMessage("§2[Info]:§f You have put your mount away");
 					h.remove();
+
 				}
+
 			}
+
 		}
+
 	}
 
 //	@EventHandler(ignoreCancelled = false)
@@ -90,14 +104,24 @@ public class ListenerMounts implements Listener {
 
 	@SuppressWarnings("deprecation")
 	@EventHandler(ignoreCancelled = false)
-	public void horseDeath(EntityDeathEvent e) {
-		if (e.getEntity() instanceof Horse) {
-			if (e.getEntity().getPassenger() != null) {
+	public void horseDeath( EntityDeathEvent e )
+	{
+
+		if (e.getEntity() instanceof Horse)
+		{
+
+			if (e.getEntity().getPassenger() != null)
+			{
+
 				Player p = (Player) e.getEntity().getPassenger();
 
 				p.sendMessage("§2[Info]:§f Your mount has died");
 				Mounts.mount_manager.setMount(p, null);
+
 			}
+
 		}
+
 	}
+
 }
