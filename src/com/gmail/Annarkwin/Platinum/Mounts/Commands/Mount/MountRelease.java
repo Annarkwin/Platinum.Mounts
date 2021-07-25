@@ -5,78 +5,23 @@ import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 
-import com.gmail.Annarkwin.Platinum.API.MainCommand;
-import com.gmail.Annarkwin.Platinum.API.Subcommand;
+import com.gmail.Annarkwin.Platinum.API.PlatinumCommand;
 import com.gmail.Annarkwin.Platinum.Mounts.Mount;
 import com.gmail.Annarkwin.Platinum.Mounts.Mounts;
 
-public class MountRelease implements Subcommand
+public class MountRelease extends PlatinumCommand
 {
 
-	private String description = "Release the mount you're riding";
-	private MainCommand main;
-	private String name = "release";
-	private String permission = "platinum.mount.release";
-	private boolean playeronly = true;
-	private String usage = "/mount release";
-
-	public MountRelease( MainCommand maincommand )
+	public MountRelease( String name, String permission, boolean player, String description, String usage )
 	{
 
-		main = maincommand;
+		super(name, permission, player, description, usage);
+		// TODO Auto-generated constructor stub
 
 	}
 
 	@Override
-	public String getDescription()
-	{
-
-		return description;
-
-	}
-
-	@Override
-	public MainCommand getMainCommand()
-	{
-
-		return main;
-
-	}
-
-	@Override
-	public String getName()
-	{
-
-		return name;
-
-	}
-
-	@Override
-	public String getPermission()
-	{
-
-		return permission;
-
-	}
-
-	@Override
-	public String getUsage()
-	{
-
-		return usage;
-
-	}
-
-	@Override
-	public boolean isPlayerOnly()
-	{
-
-		return playeronly;
-
-	}
-
-	@Override
-	public void run( CommandSender sender, String[] args )
+	public boolean run( CommandSender sender, String cmdname, String[] args )
 	{
 
 		Player p = (Player) sender;
@@ -107,6 +52,7 @@ public class MountRelease implements Subcommand
 				p.sendMessage("§4[Error]§f You aren't riding your mount");
 
 		}
+		return true;
 
 	}
 

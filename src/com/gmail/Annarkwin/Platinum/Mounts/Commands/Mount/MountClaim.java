@@ -6,78 +6,23 @@ import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Horse;
 import org.bukkit.entity.Player;
 
-import com.gmail.Annarkwin.Platinum.API.MainCommand;
-import com.gmail.Annarkwin.Platinum.API.Subcommand;
+import com.gmail.Annarkwin.Platinum.API.PlatinumCommand;
 import com.gmail.Annarkwin.Platinum.Mounts.Mount;
 import com.gmail.Annarkwin.Platinum.Mounts.Mounts;
 
-public class MountClaim implements Subcommand
+public class MountClaim extends PlatinumCommand
 {
 
-	private String description = "Claim the mount you're riding";
-	private MainCommand main;
-	private String name = "claim";
-	private String permission = "platinum.mount.claim";
-	private boolean playeronly = true;
-	private String usage = "/mount claim";
-
-	public MountClaim( MainCommand maincommand )
+	public MountClaim( String name, String permission, boolean player, String description, String usage )
 	{
 
-		main = maincommand;
+		super(name, permission, player, description, usage);
+		// TODO Auto-generated constructor stub
 
 	}
 
 	@Override
-	public String getDescription()
-	{
-
-		return description;
-
-	}
-
-	@Override
-	public MainCommand getMainCommand()
-	{
-
-		return main;
-
-	}
-
-	@Override
-	public String getName()
-	{
-
-		return name;
-
-	}
-
-	@Override
-	public String getPermission()
-	{
-
-		return permission;
-
-	}
-
-	@Override
-	public String getUsage()
-	{
-
-		return usage;
-
-	}
-
-	@Override
-	public boolean isPlayerOnly()
-	{
-
-		return playeronly;
-
-	}
-
-	@Override
-	public void run( CommandSender sender, String[] args )
+	public boolean run( CommandSender sender, String cmdname, String[] args )
 	{
 
 		Player p = (Player) sender;
@@ -105,6 +50,7 @@ public class MountClaim implements Subcommand
 			}
 
 		}
+		return true;
 
 	}
 

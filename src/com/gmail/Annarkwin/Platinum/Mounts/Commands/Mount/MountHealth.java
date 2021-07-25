@@ -4,78 +4,23 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 import com.gmail.Annarkwin.Platinum.API.CommandHelper;
-import com.gmail.Annarkwin.Platinum.API.MainCommand;
-import com.gmail.Annarkwin.Platinum.API.Subcommand;
+import com.gmail.Annarkwin.Platinum.API.PlatinumCommand;
 import com.gmail.Annarkwin.Platinum.Mounts.Mount;
 import com.gmail.Annarkwin.Platinum.Mounts.Mounts;
 
-public class MountHealth implements Subcommand
+public class MountHealth extends PlatinumCommand
 {
 
-	private String description = "Set mount max health";
-	private MainCommand main;
-	private String name = "health";
-	private String permission = "platinum.mount.health";
-	private boolean playeronly = true;
-	private String usage = "/mount health <#>";
-
-	public MountHealth( MainCommand maincommand )
+	public MountHealth( String name, String permission, boolean player, String description, String usage )
 	{
 
-		main = maincommand;
+		super(name, permission, player, description, usage);
+		// TODO Auto-generated constructor stub
 
 	}
 
 	@Override
-	public String getDescription()
-	{
-
-		return description;
-
-	}
-
-	@Override
-	public MainCommand getMainCommand()
-	{
-
-		return main;
-
-	}
-
-	@Override
-	public String getName()
-	{
-
-		return name;
-
-	}
-
-	@Override
-	public String getPermission()
-	{
-
-		return permission;
-
-	}
-
-	@Override
-	public String getUsage()
-	{
-
-		return usage;
-
-	}
-
-	@Override
-	public boolean isPlayerOnly()
-	{
-
-		return playeronly;
-
-	}
-
-	@Override
-	public void run( CommandSender sender, String[] args )
+	public boolean run( CommandSender sender, String cmdname, String[] args )
 	{
 
 		Player p = (Player) sender;
@@ -94,7 +39,7 @@ public class MountHealth implements Subcommand
 			{
 
 				p.sendMessage("§4[Error]: §fEnter a positive number");
-				return;
+				return true;
 
 			}
 
@@ -104,6 +49,7 @@ public class MountHealth implements Subcommand
 			p.sendMessage("§2[Info]: §fMount health set to " + args[1]);
 
 		}
+		return true;
 
 	}
 

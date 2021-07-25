@@ -4,78 +4,23 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 import com.gmail.Annarkwin.Platinum.API.CommandHelper;
-import com.gmail.Annarkwin.Platinum.API.MainCommand;
-import com.gmail.Annarkwin.Platinum.API.Subcommand;
+import com.gmail.Annarkwin.Platinum.API.PlatinumCommand;
 import com.gmail.Annarkwin.Platinum.Mounts.Mount;
 import com.gmail.Annarkwin.Platinum.Mounts.Mounts;
 
-public class MountJump implements Subcommand
+public class MountJump extends PlatinumCommand
 {
 
-	private String description = "Set mount Jump Strength";
-	private MainCommand main;
-	private String name = "jump";
-	private String permission = "platinum.mount.jump";
-	private boolean playeronly = true;
-	private String usage = "/mount jump <#>";
-
-	public MountJump( MainCommand maincommand )
+	public MountJump( String name, String permission, boolean player, String description, String usage )
 	{
 
-		main = maincommand;
+		super(name, permission, player, description, usage);
+		// TODO Auto-generated constructor stub
 
 	}
 
 	@Override
-	public String getDescription()
-	{
-
-		return description;
-
-	}
-
-	@Override
-	public MainCommand getMainCommand()
-	{
-
-		return main;
-
-	}
-
-	@Override
-	public String getName()
-	{
-
-		return name;
-
-	}
-
-	@Override
-	public String getPermission()
-	{
-
-		return permission;
-
-	}
-
-	@Override
-	public String getUsage()
-	{
-
-		return usage;
-
-	}
-
-	@Override
-	public boolean isPlayerOnly()
-	{
-
-		return playeronly;
-
-	}
-
-	@Override
-	public void run( CommandSender sender, String[] args )
+	public boolean run( CommandSender sender, String cmdname, String[] args )
 	{
 
 		Player p = (Player) sender;
@@ -94,7 +39,7 @@ public class MountJump implements Subcommand
 			{
 
 				p.sendMessage("§4[Error]: §fEnter a positive number");
-				return;
+				return true;
 
 			}
 
@@ -103,6 +48,7 @@ public class MountJump implements Subcommand
 			p.sendMessage("§2[Info]: §fMount jump strength set to " + args[1]);
 
 		}
+		return true;
 
 	}
 

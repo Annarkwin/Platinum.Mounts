@@ -6,36 +6,21 @@ import org.bukkit.command.CommandSender;
 
 import com.gmail.Annarkwin.Platinum.API.CommandHelper;
 import com.gmail.Annarkwin.Platinum.API.HelpCommand;
-import com.gmail.Annarkwin.Platinum.API.MainCommand;
-import com.gmail.Annarkwin.Platinum.API.Subcommand;
+import com.gmail.Annarkwin.Platinum.API.PlatinumCommand;
 
-public class MountHelp implements Subcommand , HelpCommand
+public class MountHelp extends PlatinumCommand implements HelpCommand
 {
 
-	private String description = "Show mount command help";
-	private MainCommand main;
-	private String name = "help";
-	private String permission = "platinum.mount.help";
-	private boolean playeronly = true;
-	private String usage = "/mount help";
-
-	public MountHelp( MainCommand maincommand )
+	public MountHelp( String name, String permission, boolean player, String description, String usage )
 	{
 
-		main = maincommand;
+		super(name, permission, player, description, usage);
+		// TODO Auto-generated constructor stub
 
 	}
 
 	@Override
-	public String getDescription()
-	{
-
-		return description;
-
-	}
-
-	@Override
-	public String getHelpString( Subcommand command )
+	public String getHelpString( PlatinumCommand command )
 	{
 
 		return " §5" + command.getUsage() + " §6- " + command.getDescription();
@@ -43,15 +28,15 @@ public class MountHelp implements Subcommand , HelpCommand
 	}
 
 	@Override
-	public String[] getHelpEntries( CommandSender sender, MainCommand command )
+	public String[] getHelpEntries( CommandSender sender, PlatinumCommand command )
 	{
 
 		ArrayList<String> entries = new ArrayList<String>();
 
-		for (Subcommand sc : command.getSubcommands())
+		for (PlatinumCommand sc : command.getChildren())
 		{
 
-			if (sender.hasPermission(sc.getPermission()))
+			if (sender.hasPermission(sc.getPermissionHook()))
 				entries.add(getHelpString(sc));
 
 		}
@@ -61,50 +46,10 @@ public class MountHelp implements Subcommand , HelpCommand
 	}
 
 	@Override
-	public MainCommand getMainCommand()
+	public boolean run( CommandSender sender, String cmdname, String[] args )
 	{
 
-		return main;
-
-	}
-
-	@Override
-	public String getName()
-	{
-
-		return name;
-
-	}
-
-	@Override
-	public String getPermission()
-	{
-
-		return permission;
-
-	}
-
-	@Override
-	public String getUsage()
-	{
-
-		return usage;
-
-	}
-
-	@Override
-	public boolean isPlayerOnly()
-	{
-
-		return playeronly;
-
-	}
-
-	@Override
-	public void run( CommandSender sender, String[] args )
-	{
-
-		String[] entries = getHelpEntries(sender, main);
+		String[] entries = getHelpEntries(sender, getParent());
 
 		if (args.length > 1)
 		{
@@ -129,6 +74,7 @@ public class MountHelp implements Subcommand , HelpCommand
 			CommandHelper.sendHelp(sender, entries, "Mount", 1);
 
 		}
+		return true;
 
 	}
 
