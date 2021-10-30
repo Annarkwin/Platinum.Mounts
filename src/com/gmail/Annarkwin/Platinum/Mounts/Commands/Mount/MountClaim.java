@@ -50,6 +50,7 @@ public class MountClaim extends PlatinumCommand
 			}
 
 		}
+
 		return true;
 
 	}

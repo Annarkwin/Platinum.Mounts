@@ -48,6 +48,7 @@ public class MountJump extends PlatinumCommand
 			p.sendMessage("§2[Info]: §fMount jump strength set to " + args[1]);
 
 		}
+
 		return true;
 
 	}

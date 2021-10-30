@@ -74,6 +74,7 @@ public class MountHelp extends PlatinumCommand implements HelpCommand
 			CommandHelper.sendHelp(sender, entries, "Mount", 1);
 
 		}
+
 		return true;
 
 	}

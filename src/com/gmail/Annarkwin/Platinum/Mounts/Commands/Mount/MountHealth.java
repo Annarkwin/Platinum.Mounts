@@ -49,6 +49,7 @@ public class MountHealth extends PlatinumCommand
 			p.sendMessage("§2[Info]: §fMount health set to " + args[1]);
 
 		}
+
 		return true;
 
 	}

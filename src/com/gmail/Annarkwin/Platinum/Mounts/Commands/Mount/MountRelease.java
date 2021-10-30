@@ -52,6 +52,7 @@ public class MountRelease extends PlatinumCommand
 				p.sendMessage("§4[Error]§f You aren't riding your mount");
 
 		}
+
 		return true;
 
 	}

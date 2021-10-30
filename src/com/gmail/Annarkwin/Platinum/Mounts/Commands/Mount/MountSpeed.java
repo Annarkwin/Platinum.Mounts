@@ -50,6 +50,7 @@ public class MountSpeed extends PlatinumCommand
 		}
 
 		return true;
+
 	}
 
 }
